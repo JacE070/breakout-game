@@ -16,8 +16,8 @@ const ball = {
   y: canvas.height / 2,
   size: 10,
   speed: 4,
-  dx: 4,
-  dy: -4,
+  dx: 2,
+  dy: -2,
   visible: true
 };
 
@@ -29,6 +29,7 @@ const paddle = {
   h: 10,
   speed: 8,
   dx: 0,
+  dy: 0,
   visible: true
 };
 
@@ -90,9 +91,20 @@ function drawBricks() {
   });
 }
 
+function doGravity(){
+  const bottom = canvas.height - 20;
+  if (paddle.y < bottom){
+    paddle.dy += 0.2;
+  }
+  else{
+    paddle.y = bottom;
+  }
+}
+
 // Move paddle on canvas
 function movePaddle() {
   paddle.x += paddle.dx;
+  paddle.y += paddle.dy
 
   // Wall detection
   if (paddle.x + paddle.w > canvas.width) {
@@ -128,6 +140,8 @@ function moveBall() {
     ball.y + ball.size > paddle.y
   ) {
     ball.dy = -ball.speed;
+    ball.dy += paddle.dy/2
+    paddle.dy = 0
   }
 
   // Brick collision
@@ -201,6 +215,7 @@ function draw() {
 function update() {
   movePaddle();
   moveBall();
+  doGravity();
 
   // Draw everything
   draw();
@@ -217,6 +232,11 @@ function keyDown(e) {
   } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
     paddle.dx = -paddle.speed;
   }
+  else if(e.key === 'Up' || e.key === 'ArrowUp'){
+    if (paddle.y === canvas.height - 20)
+    paddle.dy = -paddle.speed/1.3;
+  }
+  console.log(e.key)
 }
 
 // Keyup event

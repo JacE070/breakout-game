@@ -68,3 +68,12 @@ canvas {
 .rules.show {
   transform: translateX(0);
 }
+
+.credit {
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 1rem;
+}

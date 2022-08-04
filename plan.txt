@@ -10,3 +10,9 @@
 10. Add wall bounderies 
 11. Increase score when bricks break
 12. Lose - redraw bricks, reset score
+
+New Feature:
+1. Paddle Jump (Done)
+2. Setting (Done)
+3. Different Mode
+4. Different Paddle/Ball Skin

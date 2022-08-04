@@ -49,6 +49,7 @@ canvas {
   position: absolute;
   top: 30px;
   left: 30px;
+  width: 7rem;
 }
 
 .rules {
@@ -63,10 +64,50 @@ canvas {
   line-height: 1.5;
   transform: translateX(-400px);
   transition: transform 1s ease-in-out;
+  z-index: 10;
 }
 
 .rules.show {
   transform: translateX(0);
+}
+
+.settings-btn {
+  position: absolute;
+  top: 75px;
+  left: 30px;
+  width: 7rem;
+}
+
+.settings .btn {
+  margin-top: 1rem;
+  width: 6rem;
+}
+
+.settings {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: #333;
+  color: #fff;
+  min-height: 100vh;
+  width: 400px;
+  padding: 20px;
+  line-height: 1.5;
+  transform: translateX(-400px);
+  transition: transform 1s ease-in-out;
+  z-index: 10;
+}
+
+.settings.show {
+  transform: translateX(0);
+}
+
+.reset-btn {
+  position: absolute;
+  top: 120px;
+  left: 30px;
+  width: 7rem;
 }
 
 .credit {

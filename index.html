@@ -10,18 +10,36 @@
   <body>
     <h1>Breakout!</h1>
     <button id="rules-btn" class="btn rules-btn">Show Rules</button>
-    <div id="rules" class="rules">
-      <h2>How To Play:</h2>
-      <p>
-        Use your right and left keys to move the paddle to bounce the ball up
-        and break the blocks.
-      </p>
-      <p>
-        Use your up key to jump. The upward velocity helps the ball to move faster.
-      </p>
-      <p>If you miss the ball, your score and the blocks will reset.</p>
-      <button id="close-btn" class="btn">Close</button>
+  <div id="rules" class="rules">
+    <h2>How To Play:</h2>
+    <p>
+      Use your right and left keys to move the paddle to bounce the ball up
+      and break the blocks.
+    </p>
+    <p>
+      Use your up key to jump. The upward velocity helps the ball to move faster.
+    </p>
+    <p>If you miss the ball, your score and the blocks will reset.</p>
+    <button id="rules-close-btn" class="btn">Close</button>
+  </div>
+
+  <button id="settings-btn" class="btn settings-btn">Settings</button>
+  <div id="settings" class="settings">
+      <h2>Settings</h2>
+      <form>
+        <label for="speed">Ball Speed</label>
+        <input type="text" id="speed" style="margin: 0.5rem;"><br>
+        <input type="radio" name="settings" id="red" value="red">
+        <label for="red">Red</label>
+        <input type="radio" name="settings" id="blue" value="blue">
+        <label for="blue">Blue</label>
+        <input type="radio" name="settings" id="green" value="green">
+        <label for="green">Green</label>
+      </form>
+      <button id="settings-close-btn" class="btn settings-close-btn">Close</button>
+      <button id="settings-apply-btn" class="btn settings-close-btn">Apply</button>
     </div>
+    <button id="reset-btn" class="btn reset-btn">Reset</button>
 
     <canvas id="canvas" width="800" height="600"></canvas>
     <p class="credit">Developed by: Junping Luo</p>

@@ -1,8 +1,14 @@
 const rulesBtn = document.getElementById('rules-btn');
-const closeBtn = document.getElementById('close-btn');
+const rulesCloseBtn = document.getElementById('rules-close-btn');
+const settingsBtn = document.getElementById('settings-btn')
+const settingApplyBtn = document.getElementById('settings-apply-btn');
+const settingsCloseBtn = document.getElementById('settings-close-btn');
+const resetBtn = document.getElementById('reset-btn');
 const rules = document.getElementById('rules');
+const settings = document.getElementById('settings')
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+let color = "#0095dd";
 
 let score = 0;
 
@@ -15,9 +21,9 @@ const ball = {
   x: canvas.width / 2,
   y: canvas.height / 2,
   size: 10,
-  speed: 4,
-  dx: 2,
-  dy: -2,
+  speed: 3,
+  dx: 3,
+  dy: -3,
   visible: true
 };
 
@@ -58,7 +64,7 @@ for (let i = 0; i < brickRowCount; i++) {
 function drawBall() {
   ctx.beginPath();
   ctx.arc(ball.x, ball.y, ball.size, 0, Math.PI * 2);
-  ctx.fillStyle = ball.visible ? '#0095dd' : 'transparent';
+  ctx.fillStyle = ball.visible ? color : 'transparent';
   ctx.fill();
   ctx.closePath();
 }
@@ -67,7 +73,7 @@ function drawBall() {
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddle.x, paddle.y, paddle.w, paddle.h);
-  ctx.fillStyle = paddle.visible ? '#0095dd' : 'transparent';
+  ctx.fillStyle = paddle.visible ? color : 'transparent';
   ctx.fill();
   ctx.closePath();
 }
@@ -84,7 +90,7 @@ function drawBricks() {
     column.forEach(brick => {
       ctx.beginPath();
       ctx.rect(brick.x, brick.y, brick.w, brick.h);
-      ctx.fillStyle = brick.visible ? '#0095dd' : 'transparent';
+      ctx.fillStyle = brick.visible ? color : 'transparent';
       ctx.fill();
       ctx.closePath();
     });
@@ -223,6 +229,11 @@ function update() {
   requestAnimationFrame(update);
 }
 
+function settingsInit(){
+  document.getElementById("speed").value = "3";
+  document.getElementById("blue").checked = 1;
+}
+settingsInit();
 update();
 
 // Keydown event
@@ -251,10 +262,64 @@ function keyUp(e) {
   }
 }
 
+function applySettings(){
+  const [red, blue, green] = [document.getElementById("red").checked,
+  document.getElementById("blue").checked,
+  document.getElementById("green").checked];
+  let new_color = null;
+  if (red){
+    new_color = "#cf3422";
+    document.body.style.backgroundColor = "#cf3422";
+    // document.getElementsByClassName("")
+    
+  }
+  else if (blue){
+    new_color = "#0095dd";
+    document.body.style.backgroundColor = "#0095dd";
+  }
+  else if (green){
+    new_color = "#40c95b";
+    document.body.style.backgroundColor = "#40c95b";
+  }
+  if (color !== new_color){
+    color = new_color
+    // console.log(color, new_color);
+    draw();
+  }
+  const s = document.getElementById('speed').value;
+  if(s){
+    const sp = parseFloat(s);
+    ball.speed = sp;
+    ball.dx = sp;
+    ball.dy = -sp;
+  }
+
+}
+
+function reset(){
+  bricks.forEach(column => {
+    column.forEach(brick => {
+      brick.visible = true;
+    });
+  });
+  applySettings();
+  ball.x =  canvas.width / 2;
+  ball.y = canvas.height / 2;
+  ball.speed = 3;
+  ball.dx = 3;
+  ball.dy = -3;
+  // settingsInit(); 
+  draw()
+}
+
 // Keyboard event handlers
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
 
 // Rules and close event handlers
 rulesBtn.addEventListener('click', () => rules.classList.add('show'));
-closeBtn.addEventListener('click', () => rules.classList.remove('show'));
+rulesCloseBtn.addEventListener('click', () => rules.classList.remove('show'));
+settingsBtn.addEventListener('click', () => settings.classList.add('show'));
+settingApplyBtn.addEventListener('click', applySettings);
+settingsCloseBtn.addEventListener('click', () => settings.classList.remove('show'));
+resetBtn.addEventListener('click', reset);

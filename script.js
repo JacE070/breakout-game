@@ -309,7 +309,8 @@ function reset(){
   ball.dx = 3;
   ball.dy = -3;
   // settingsInit(); 
-  draw()
+  draw();
+  score = 0;
 }
 
 // Keyboard event handlers
